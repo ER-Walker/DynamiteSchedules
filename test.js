@@ -9,5 +9,5 @@ app.get('/', (req, res) => {
 
 // Start the server and listen for incoming requests
 app.listen(PORT, () => {
-  console.log(`Server is running on http://dynamiteschedules.com`); // Log a message to the console when the server starts
+  console.log(`Server is running on dynamiteschedules.com`); // Log a message to the console when the server starts
 });

@@ -6,7 +6,9 @@ const port = 3000;
 console.log('Server is running on port ' + port);
 
 app.get('/', (req, res) => {
-    res.sendFile(import.meta.dirname + '/../pages/login.html');
+    const filePath = import.meta.dirname + '/../pages/index.html';
+    console.log('Serving file: ' + filePath);
+    res.sendFile(filePath);
 });
 
 app.listen(port, () => {

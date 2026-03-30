@@ -2,12 +2,12 @@ import express from 'express';
 
 const app = express();
 const port = 3000;
-const __dirname = 'var/www/dynamiteschedules/DynamiteSchedules';
+const __dirname = '/var/www/dynamiteschedules/DynamiteSchedules';
 
 console.log('Server is running on port ' + port);
 
 app.get('/', (req, res) => {
-    filePath = __dirname + '/pages/login.html';
+    const filePath = __dirname + '/pages/login.html';
     console.log('Serving file: ' + filePath);
     res.sendFile(filePath);
 });

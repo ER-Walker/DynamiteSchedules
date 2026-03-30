@@ -6,7 +6,7 @@ const port = 3000;
 console.log('Server is running on port ' + port);
 
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/pages/login.html');
+    res.sendFile('DynamiteScheduling/pages/login.html', { root: __dirname });
 });
 
 app.listen(port, () => {

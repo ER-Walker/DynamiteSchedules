@@ -1,10 +1,18 @@
+import dotenv from 'dotenv';
 import express from 'express';
+import mongoose from 'mongoose';
+import {dirname, join} from 'path';
 
 const app = express();
 const port = 3000;
 const __dirname = '/var/www/dynamiteschedules/DynamiteSchedules';
 
 console.log('Server is running on port ' + port);
+
+dotenv.config({path: join(__dirname, '.env')});
+mongoose.connect(process.env.MONGO_URI)
+	.then(() => console.log('Connected to MongoDB'))
+	.catch(err => console.error('Connection error: ' , err));
 
 app.get('/', (req, res) => {
     const filePath = __dirname + '/pages/login.html';

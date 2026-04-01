@@ -29,6 +29,13 @@ app.get('/resources', (req,res) => {
     filePath = __dirname;
 })
 
+app.get('/index', (req,res) => {
+    filePath += '/pages/index.html';
+    console.log('Serving file: ' + __dirname + '/pages/index.html');
+    res.sendFile(filePath);
+    filePath = __dirname;
+})
+
 app.listen(port, () => {
     console.log('Server is listening on port ' + port);
 })

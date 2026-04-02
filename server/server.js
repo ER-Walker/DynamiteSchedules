@@ -6,7 +6,6 @@ import {dirname, join} from 'path';
 const app = express();
 const port = 3000;
 const __dirname = '/var/www/dynamiteschedules/DynamiteSchedules';
-let filePath = __dirname;
 
 console.log('Server is running on port ' + port);
 
@@ -18,24 +17,18 @@ mongoose.connect(process.env.MONGO_URI)
 app.use(express.static(__dirname));
 
 app.get('/', (req, res) => {
-    filePath += '/pages/login.html';
-    console.log('Serving file: ' + filePath);
-    res.sendFile(filePath);
-    filePath = __dirname;
+    console.log('Serving file: ' + __dirname + "/pages/login.html");
+    res.sendFile(join(__dirname, "/pages/login.html"));
 });
 
 app.get('/resources', (req,res) => {
-    filePath += '/pages/resources.html';
     console.log('Serving file: ' + __dirname + '/pages/resources.html');
-    res.sendFile(filePath);
-    filePath = __dirname;
+    res.sendFile(join(__dirname, "/pages/resources.html"));
 })
 
 app.get('/index', (req,res) => {
-    filePath += '/pages/index.html';
     console.log('Serving file: ' + __dirname + '/pages/index.html');
-    res.sendFile(filePath);
-    filePath = __dirname;
+    res.sendFile(join(__dirname, "/pages/index.html"));
 })
 
 app.listen(port, () => {

@@ -31,7 +31,7 @@ app.get('/index', (req,res) => {
     res.sendFile(join(__dirname, "/pages/index.html"));
 })
 
-app.get('/styles/resourceStyle', (req,res) => {
+app.get('/styles/resourceStyle.css', (req,res) => {
     console.log('Serving file: ' + __dirname + '/styles/resourceStyle.css');
     res.sendFile(join(__dirname, '/styles/resourceStyle.css'));
 })

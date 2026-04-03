@@ -31,11 +31,6 @@ app.get('/index', (req,res) => {
     res.sendFile(join(__dirname, "/pages/index.html"));
 })
 
-app.get('/styles/resourceStyle.css', (req,res) => {
-    console.log('Serving file: ' + __dirname + '/styles/resourceStyle.css');
-    res.sendFile(join(__dirname, '/styles/resourceStyle.css'));
-})
-
 app.listen(port, () => {
     console.log('Server is listening on port ' + port);
 })

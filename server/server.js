@@ -1,14 +1,14 @@
 import dotenv from 'dotenv';
 import express from 'express';
 import mongoose from 'mongoose';
-import { join } from 'path';
+import path from 'path';
 import userRoutes from './routes/userRoutes.js';
 import studentRoutes from './routes/studentRoutes.js';
 
 const app = express();
-const rootDir = process.cwd();
+const rootDir = path.join(process.cwd(), '/..');
 
-dotenv.config({ path: join(rootDir, '.env') });
+dotenv.config({ path: path.join(rootDir, '.env') });
 const port = Number(process.env.PORT) || 3000;
 
 console.log('Server is running on port ' + port);
@@ -33,17 +33,17 @@ app.use('/api/students', studentRoutes);
 
 app.get('/', (req, res) => {
     console.log('Serving file: ' + rootDir + '/pages/login.html');
-    res.sendFile(join(rootDir, 'pages/login.html'));
+    res.sendFile(path.join(rootDir, 'pages/login.html'));
 });
 
 app.get('/resources', (req,res) => {
     console.log('Serving file: ' + rootDir + '/pages/resources.html');
-    res.sendFile(join(rootDir, 'pages/resources.html'));
+    res.sendFile(path.join(rootDir, 'pages/resources.html'));
 })
 
 app.get('/index', (req,res) => {
     console.log('Serving file: ' + rootDir + '/pages/index.html');
-    res.sendFile(join(rootDir, 'pages/index.html'));
+    res.sendFile(path.join(rootDir, 'pages/index.html'));
 })
 
 app.listen(port, () => {

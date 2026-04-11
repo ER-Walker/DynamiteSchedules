@@ -22,7 +22,14 @@ async function login() {
             body: JSON.stringify({ username, password })
         });
 
-        const data = await res.json();
+        let data;
+        try {
+            data = await res.json();
+        }
+        catch {
+            alert('Server error. Please try again');
+            return;
+        }
 
         if (res.ok) {
             window.location.href = '/index';

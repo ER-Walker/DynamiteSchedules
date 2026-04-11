@@ -2,11 +2,14 @@ import dotenv from 'dotenv';
 import express from 'express';
 import mongoose from 'mongoose';
 import path from 'path';
+import { fileURLToPath } from 'url';
 import userRoutes from './routes/userRoutes.js';
 import studentRoutes from './routes/studentRoutes.js';
 
 const app = express();
-const rootDir = path.join(process.cwd(), '/..');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const rootDir = path.join(__dirname, '..');
 
 dotenv.config({ path: path.join(rootDir, '.env') });
 const port = Number(process.env.PORT) || 3000;

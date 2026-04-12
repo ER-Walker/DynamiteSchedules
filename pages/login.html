@@ -3,14 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="stylesheet" href="/styles/loginStyle.css">
+    <link rel="stylesheet" href="/styles/loginStyle.min.css">
 </head>
-<body>
-    <h1>Welcome to Dynamite Scheduling</h1>
-    <h2>Login to your account</h2>
-    <input type="text" id="username" placeholder="Username">
-    <input type="password" id="password" placeholder="Password">
-    <button id="login-button"> Login </button>
-    <script src="/scripts/loginAPI.js" defer></script>
+<body class="bg-black">
+    <div class=" bg-red-800 h-20 w-full border-2 border-red-50 rounded-md my-10 p-2 flex justify-center items-center">
+        <h1 class="text-[30px] text-white text-center font-mono font-extrabold">Welcome to Dynamite Schedules</h1>
+    </div>
+    <div class=" bg-red-800 h-40 w-full border-2 border-red-50 rounded-md my-4 p-6 flex flex-col justify-center items-center">
+        <h2 class="text-white text-center font-mono font-extrabold my-1 flex justify-center items-center ">Login to your account</h2>
+        <input type="text" id="username" placeholder="Username" class="border-2 border-black text-white" my-2>
+        <input type="password" id="password" placeholder="Password" class="border-2 border-black text-white my-2">
+        <button id="login-button" class="border-2 border-black px-4 wx-8 text-white"> Login </button>
+        <script src="/scripts/loginAPI.js" defer></script>
+    </div> 
 </body>
 </html>

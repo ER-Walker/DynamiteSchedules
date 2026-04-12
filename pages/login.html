@@ -5,16 +5,18 @@
     <title>Login</title>
     <link rel="stylesheet" href="/styles/loginStyle.min.css">
 </head>
-<body class="bg-black">
+<body class="bg-gray-800">
     <div class=" bg-red-800 h-20 w-full border-2 border-red-50 rounded-md my-10 p-2 flex justify-center items-center">
         <h1 class="text-[30px] text-white text-center font-mono font-extrabold">Welcome to Dynamite Schedules</h1>
     </div>
-    <div class=" bg-red-800 h-40 w-full border-2 border-red-50 rounded-md my-4 p-6 flex flex-col justify-center items-center">
-        <h2 class="text-white text-center font-mono font-extrabold my-1 flex justify-center items-center ">Login to your account</h2>
-        <input type="text" id="username" placeholder="Username" class="border-2 border-black text-white" my-2>
-        <input type="password" id="password" placeholder="Password" class="border-2 border-black text-white my-2">
-        <button id="login-button" class="border-2 border-black px-4 wx-8 text-white"> Login </button>
-        <script src="/scripts/loginAPI.js" defer></script>
-    </div> 
+    <div class="flex flex-row justify-center items-center">
+        <div class=" bg-red-800 h-80 w-1/2 border-2 border-red-50 rounded-md my-4 p-6 flex flex-col justify-center items-center">
+            <h2 class="text-white text-center w-auto h-auto font-mono font-extrabold my-1 flex justify-center items-center text-3xl">Login to your account</h2>
+            <input type="text" id="username" placeholder="Username" class="border-2 border-black text-white my-2 text-2xl">
+            <input type="password" id="password" placeholder="Password" class="border-2 border-black text-white my-2 text-2xl">
+            <button id="login-button" class="border-2 border-black px-4 wx-8 text-white text-xl"> Login </button>
+            <script src="/scripts/loginAPI.js" defer></script>
+        </div> 
+    </div>
 </body>
 </html>

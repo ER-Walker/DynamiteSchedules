@@ -49,6 +49,16 @@ app.get('/index', (req,res) => {
     res.sendFile(path.join(rootDir, 'pages/index.html'));
 })
 
+app.get('/dashboard', (req, res) => {
+    console.log('Serving file: ' + rootDir + '/pages/dashboard.html');
+    res.sendFile(path.join(rootDir, 'pages/dashboard.html'));
+})
+
+app.get('/schedule', (req, res) => {
+    console.log('Serving file: ' + rootDir + '/pages/schedule.html');
+    res.sendFile(path.join(rootDir, 'pages/schedule.html'));
+})
+
 app.listen(port, () => {
     console.log('Server is listening on port ' + port);
 })

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Dashboard</title>
+        <link rel="stylesheet" href="styles/dashboardStyle.min.css"> 
+    </head>
+    <body class="bg-gray-600">
+        <script src="../scripts/button.js"></script>
+        <div id="WelcomeBanner" class="flex-row justify-center items-center rounded-md text-center bg-red-800 border-2 border-white text-3xl">
+            <h1 class="text-white font-mono font-extrabold">Welcome Back!</h1>
+        </div>
+        <div id="Row1" class="flex flex-row justify-center items-center mt-6">
+            <div id="create" class="flex flex-col justify-center rounded-md items-center my-2 mx-4 w-2/5 h-60 text-center bg-red-800 border-2 border-white">
+                <h2 class="text-white font-mono font-extrabold text-xl my-2 ">Schedules</h2>
+                <button data-url="schedule" class="bg-gray-800 text-orange-300 text-base">New Schedule</button>
+            </div>
+            <div id="resources" class="flex flex-col justify-center items-center my-2 mx-4 w-2/5 h-60 text-center bg-red-800 border-2 border-white rounded-md">
+                <h2 class="text-white font-mono font-extrabold text-xl my-2">Resources</h2>
+                <button data-url="resources" class="bg-gray-800 text-orange-300 text-base">Find Resources</button>
+            </div>
+        </div>
+    </body>
+</html>

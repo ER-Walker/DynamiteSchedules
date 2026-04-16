@@ -40,6 +40,14 @@ const studentSchema = new mongoose.Schema(
       type: String,
       required: true,
       trim: true
+    },
+    completedClasses: {
+      type: [String],
+      default: []
+    },
+    currentClasses: {
+      type: [String],
+      default: []
     }
   },
   {

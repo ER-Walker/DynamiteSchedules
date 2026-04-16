@@ -5,6 +5,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import userRoutes from './routes/userRoutes.js';
 import studentRoutes from './routes/studentRoutes.js';
+import degreeRequirementRoutes from './routes/degreeRequirementRoutes.js';
 
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
@@ -25,7 +26,12 @@ mongoose.connect(process.env.MONGO_URI)
 
     const usersCount = await mongoose.connection.collection('users').countDocuments();
     const studentsCount = await mongoose.connection.collection('students').countDocuments();
-    console.log(`Mongo counts -> users: ${usersCount}, students: ${studentsCount}`);
+    const degreeRequirementsCount = await mongoose.connection
+      .collection('degreeRequirements')
+      .countDocuments();
+    console.log(
+      `Mongo counts -> users: ${usersCount}, students: ${studentsCount}, degreeRequirements: ${degreeRequirementsCount}`
+    );
   })
 	.catch(err => console.error('Connection error: ' , err));
 
@@ -33,6 +39,7 @@ app.use(express.json());
 app.use(express.static(rootDir));
 app.use('/api/users', userRoutes);
 app.use('/api/students', studentRoutes);
+app.use('/api/degree-requirements', degreeRequirementRoutes);
 
 app.get('/', (req, res) => {
     console.log('Serving file: ' + rootDir + '/pages/login.html');

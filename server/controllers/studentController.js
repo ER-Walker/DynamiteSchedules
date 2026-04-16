@@ -41,6 +41,8 @@ export async function getStudentById(req, res) {
 export async function createStudent(req, res) {
   try {
     const { studentId, email, firstName, lastName, major, track } = req.body;
+    const completedClassesInput = req.body.completedClasses;
+    const currentClassesInput = req.body.currentClasses;
     const userId = req.body.userId || req.body.userID;
 
     if (!userId || !studentId || !email || !firstName || !lastName || !major || !track) {
@@ -52,6 +54,22 @@ export async function createStudent(req, res) {
     if (!mongoose.isValidObjectId(userId)) {
       return res.status(400).json({ message: 'Invalid userId' });
     }
+
+    if (completedClassesInput !== undefined && !Array.isArray(completedClassesInput)) {
+      return res.status(400).json({ message: 'completedClasses must be an array' });
+    }
+
+    if (currentClassesInput !== undefined && !Array.isArray(currentClassesInput)) {
+      return res.status(400).json({ message: 'currentClasses must be an array' });
+    }
+
+    const completedClasses = (completedClassesInput || [])
+      .map((value) => String(value).trim())
+      .filter(Boolean);
+
+    const currentClasses = (currentClassesInput || [])
+      .map((value) => String(value).trim())
+      .filter(Boolean);
 
     const user = await User.findById(userId).select('_id');
     if (!user) {
@@ -65,7 +83,9 @@ export async function createStudent(req, res) {
       firstName: firstName.trim(),
       lastName: lastName.trim(),
       major: major.trim(),
-      track: track.trim()
+      track: track.trim(),
+      completedClasses,
+      currentClasses
     });
 
     const populated = await Student.findById(created._id).populate('userId', '_id username role');

@@ -1,3 +1,4 @@
+import jwt from 'jsonwebtoken';
 import { User } from '../models/User.js';
 
 export async function getUsers(req, res) {
@@ -62,13 +63,29 @@ export const loginUser = async (req, res) => {
     if (!user) {
       return res.status(401).json({ message: 'Invalid username or password' });
     }
-    console.log('Stored password:', user.password);
-    console.log('Provided password:', password);
     if (password != user.password) {
       return res.status(401).json({ message: 'Invalid username or password' });
     }
+
+    const token = jwt.sign( 
+      { username: user.username },
+      process.env.SECRET,
+      { expiresIn: '1h' }
+    );
+    
+    res.cookie('token', token, {
+      httpOnly: true,
+    });
+
     res.status(200).json({ message: 'Login successful' });
   } catch (err) {
     res.status(500).json({ message: 'Login failed', error: err.message });
   }
+}
+
+export const logoutUser = (req, res) => {
+  res.clearCookie('token', {
+    httpOnly: true,
+  });
+  res.status(200).json({ message: 'Logout successful' });
 };

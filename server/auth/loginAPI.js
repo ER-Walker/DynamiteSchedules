@@ -3,7 +3,6 @@ const button = document.getElementById('login-button');
 button.addEventListener('click', login);
 
 async function login() {
-    console.log('Login button clicked');
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
     console.log("Username: " + username);

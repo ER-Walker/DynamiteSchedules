@@ -2,9 +2,11 @@ import dotenv from 'dotenv';
 import express from 'express';
 import mongoose from 'mongoose';
 import path from 'path';
+import cookieParser from 'cookie-parser';
 import { fileURLToPath } from 'url';
 import userRoutes from './routes/userRoutes.js';
 import studentRoutes from './routes/studentRoutes.js';
+import {requireAuth } from './auth/auth.js';
 
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
@@ -30,24 +32,26 @@ mongoose.connect(process.env.MONGO_URI)
 	.catch(err => console.error('Connection error: ' , err));
 
 app.use(express.json());
-app.use(express.static(rootDir));
-app.use('/api/users', userRoutes);
-app.use('/api/students', studentRoutes);
+app.use(cookieParser());
 
 app.get('/', (req, res) => {
     console.log('Serving file: ' + rootDir + '/pages/login.html');
     res.sendFile(path.join(rootDir, 'pages/login.html'));
 });
 
-app.get('/resources', (req,res) => {
+app.get('/resources', requireAuth, (req,res) => {
     console.log('Serving file: ' + rootDir + '/pages/resources.html');
     res.sendFile(path.join(rootDir, 'pages/resources.html'));
 })
 
-app.get('/index', (req,res) => {
+app.get('/index', requireAuth, (req,res) => {
     console.log('Serving file: ' + rootDir + '/pages/index.html');
     res.sendFile(path.join(rootDir, 'pages/index.html'));
 })
+
+app.use(express.static(rootDir));
+app.use('/api/users', userRoutes);
+app.use('/api/students', studentRoutes);
 
 app.listen(port, () => {
     console.log('Server is listening on port ' + port);

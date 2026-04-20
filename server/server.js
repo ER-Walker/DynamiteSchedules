@@ -71,6 +71,11 @@ app.get('/schedule', requireAuth, (req, res) => {
     res.sendFile(path.join(rootDir, 'pages/schedule.html'));
 })
 
+app.get('/courses', (req, res) => {
+    console.log('Serving file: ' + rootDir + '/pages/courses.html');
+    res.sendFile(path.join(rootDir, 'pages/courses.html'));
+})
+
 app.use(express.static(rootDir));
 app.use('/api/users', userRoutes);
 app.use('/api/students', studentRoutes);

@@ -31,7 +31,7 @@ async function login() {
         }
 
         if (res.ok) {
-            window.location.href = '/index';
+            window.location.href = '/dashboard';
         }
         else {
             alert(data.message);

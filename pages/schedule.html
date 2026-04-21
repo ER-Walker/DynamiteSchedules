@@ -2,12 +2,79 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Schedule Builder</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dynamite Schedules | Schedule Builder</title>
+        <link rel="stylesheet" href="/styles/scheduleStyle.css">
+        <script src="/scripts/schedulePage.js" defer></script>
     </head>
-    <body>
-        <h1 class="size-40">UNDER CONSTRUCTION</h1>
-        <img src="placeholder.png" class="w-auto h-auto"/>
-        <button id="logout-button" class="border-2 border-black px-4 wx-8 text-white text-xl">Logout</button>
+    <body class="schedule-page">
+        <div class="page-banner">
+            <h1>Schedule Builder</h1>
+        </div>
+
+        <div class="page-shell">
+            <section class="filter-panel">
+                <div class="filter-grid">
+                    <label class="form-field">
+                        <span>Search</span>
+                        <input id="search-filter" type="text" placeholder="Course ID or name">
+                    </label>
+
+                    <label class="form-field">
+                        <span>Department</span>
+                        <select id="department-filter">
+                            <option value="">All departments</option>
+                        </select>
+                    </label>
+
+                    <label class="form-field">
+                        <span>Requirement</span>
+                        <select id="tag-filter">
+                            <option value="">All tags</option>
+                        </select>
+                    </label>
+
+                    <label class="form-field">
+                        <span>Credits</span>
+                        <select id="credits-filter">
+                            <option value="">All credits</option>
+                        </select>
+                    </label>
+
+                    <label class="form-field">
+                        <span>Has Prerequisites</span>
+                        <select id="prerequisite-filter">
+                            <option value="all">All courses</option>
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                    </label>
+                </div>
+
+                <label class="form-field select-field">
+                    <span>Course Selection</span>
+                    <select id="course-select">
+                        <option value="">Choose a course</option>
+                    </select>
+                </label>
+
+                <p id="results-summary" class="results-summary">Loading courses...</p>
+            </section>
+
+            <section class="preview-panel">
+                <h2>Selected Course</h2>
+                <div id="course-preview" class="course-preview empty-state">
+                    Choose a course from the dropdown to see the details here.
+                </div>
+                <p id="cart-message" class="cart-message"></p>
+                <div class="panel-header-row">
+                    <button id="add-to-cart-button" class="add-button" type="button">Add To Cart</button>
+                    <a href="/dashboard" class="back-link">Back to Dashboard</a>
+                </div>
+            </section>
+        </div>
+
+        <button id="logout-button" class="logout-button">Logout</button>
         <script src="/scripts/logoutAPI.js" defer></script>
     </body>
 </html>

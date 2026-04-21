@@ -48,11 +48,16 @@ const studentSchema = new mongoose.Schema(
     currentClasses: {
       type: [String],
       default: []
+    },
+    cart: {
+      type: [String],
+      default: []
     }
   },
   {
     collection: 'students',
-    timestamps: true
+    timestamps: { createdAt: true, updatedAt: false },
+    versionKey: false
   }
 );
 

@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import { Student } from '../models/Student.js';
 import { User } from '../models/User.js';
+import { Course } from '../models/Course.js';
 
 export async function getStudents(req, res) {
   try {
@@ -38,11 +39,67 @@ export async function getStudentById(req, res) {
   }
 }
 
+export async function addCourseToCart(req, res) {
+  try {
+    const username = req.user?.username;
+    const { courseId } = req.body;
+
+    if (!username) {
+      return res.status(401).json({ message: 'Unauthorized' });
+    }
+
+    if (!courseId) {
+      return res.status(400).json({ message: 'courseId is required' });
+    }
+
+    const normalizedCourseId = String(courseId).trim();
+    const user = await User.findOne({ username }).select('_id');
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const student = await Student.findOne({ userId: user._id });
+
+    if (!student) {
+      return res.status(404).json({ message: 'Student not found for this user' });
+    }
+
+    const course = await Course.findById(normalizedCourseId).select('_id');
+
+    if (!course) {
+      return res.status(404).json({ message: 'Course not found' });
+    }
+
+    if (!Array.isArray(student.cart)) {
+      student.cart = [];
+    }
+
+    if (student.cart.includes(normalizedCourseId)) {
+      return res.status(200).json({
+        message: 'Course is already in the cart',
+        cart: student.cart
+      });
+    }
+
+    student.cart.push(normalizedCourseId);
+    await student.save();
+
+    return res.status(200).json({
+      message: 'Course added to cart',
+      cart: student.cart
+    });
+  } catch (err) {
+    return res.status(500).json({ message: 'Failed to update cart', error: err.message });
+  }
+}
+
 export async function createStudent(req, res) {
   try {
     const { studentId, email, firstName, lastName, major, track } = req.body;
     const completedClassesInput = req.body.completedClasses;
     const currentClassesInput = req.body.currentClasses;
+    const cartInput = req.body.cart;
     const userId = req.body.userId || req.body.userID;
 
     if (!userId || !studentId || !email || !firstName || !lastName || !major || !track) {
@@ -63,11 +120,19 @@ export async function createStudent(req, res) {
       return res.status(400).json({ message: 'currentClasses must be an array' });
     }
 
+    if (cartInput !== undefined && !Array.isArray(cartInput)) {
+      return res.status(400).json({ message: 'cart must be an array' });
+    }
+
     const completedClasses = (completedClassesInput || [])
       .map((value) => String(value).trim())
       .filter(Boolean);
 
     const currentClasses = (currentClassesInput || [])
+      .map((value) => String(value).trim())
+      .filter(Boolean);
+
+    const cart = (cartInput || [])
       .map((value) => String(value).trim())
       .filter(Boolean);
 
@@ -85,7 +150,8 @@ export async function createStudent(req, res) {
       major: major.trim(),
       track: track.trim(),
       completedClasses,
-      currentClasses
+      currentClasses,
+      cart
     });
 
     const populated = await Student.findById(created._id).populate('userId', '_id username role');

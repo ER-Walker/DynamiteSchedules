@@ -26,11 +26,16 @@ export async function getUserById(req, res) {
 
 export async function createUser(req, res) {
   try {
-    const { username, password, role } = req.body;
+    const { username, password, code } = req.body;
 
     if (!username || !password) {
       return res.status(400).json({ message: 'username and password are required' });
     }
+
+    let role ='student';
+   if (code && code === process.env.ADMIN_CODE) {
+    role = 'admin';
+   }
 
     const existing = await User.findOne({ username: username.trim() });
     if (existing) {
@@ -40,7 +45,7 @@ export async function createUser(req, res) {
     const created = await User.create({
       username: username.trim(),
       password,
-      role: role || 'student'
+      role
     });
 
     return res.status(201).json({
@@ -68,7 +73,7 @@ export const loginUser = async (req, res) => {
     }
 
     const token = jwt.sign( 
-      { username: user.username },
+      { username: user.username, role: user.role },
       process.env.SECRET,
       { expiresIn: '1h' }
     );

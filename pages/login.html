@@ -6,17 +6,77 @@
     <link rel="stylesheet" href="/styles/loginStyle.min.css">
 </head>
 <body class="bg-gray-800">
-    <div class=" bg-red-800 h-20 w-full border-2 border-red-50 rounded-md my-10 p-2 flex justify-center items-center">
+    <div class="bg-red-800 h-20 w-full border-2 border-red-50 rounded-md my-10 p-2 flex justify-center items-center">
         <h1 class="text-[30px] text-white text-center font-mono font-extrabold">Welcome to Dynamite Schedules</h1>
     </div>
-    <div class="flex flex-row justify-center items-center">
-        <div class=" bg-red-800 h-80 w-1/2 border-2 border-red-50 rounded-md my-4 p-6 flex flex-col justify-center items-center">
-            <h2 class="text-white text-center w-auto h-auto font-mono font-extrabold my-1 flex justify-center items-center text-3xl">Login to your account</h2>
-            <input type="text" id="username" placeholder="Username" class="border-2 border-black text-white my-2 text-2xl">
-            <input type="password" id="password" placeholder="Password" class="border-2 border-black text-white my-2 text-2xl">
-            <button id="login-button" class="border-2 border-black px-4 wx-8 text-white text-xl"> Login </button>
-            <script src="/scripts/loginAPI.js" defer></script>
-        </div> 
+    <div class="flex flex-col justify-center items-center">
+
+        <!-- Login Card -->
+        <div class="bg-red-800 w-1/2 border-2 border-red-50 rounded-md my-4 p-6 flex flex-col justify-center items-center">
+            <h2 class="text-white text-center font-mono font-extrabold my-1 text-3xl">Login to your account</h2>
+            <input type="text" id="username" placeholder="Username" class="border-2 border-black text-white my-2 text-2xl w-full">
+            <input type="password" id="password" placeholder="Password" class="border-2 border-black text-white my-2 text-2xl w-full">
+            <button id="login-button" class="border-2 border-black px-4 py-2 text-white text-xl mt-2">Login</button>
+            <button onclick="toggleCreateForm()" class="text-gray-300 font-mono mt-4 underline text-sm">Create Account</button>
+        </div>
+
+        <!-- Create Account Card -->
+        <div id="create-form" style="display:none;" class="bg-red-800 w-1/2 border-2 border-red-50 rounded-md my-4 p-6 flex flex-col justify-center items-center">
+            <h2 class="text-white text-center font-mono font-extrabold my-1 text-3xl">Create an Account</h2>
+
+            <!-- Account type selector -->
+            <div class="flex w-full justify-center gap-6 my-3">
+                <label class="text-white font-mono">
+                    <input type="radio" name="account-type" value="student" checked onchange="switchAccountType('student')"> Student
+                </label>
+                <label class="text-white font-mono">
+                    <input type="radio" name="account-type" value="admin" onchange="switchAccountType('admin')"> Admin
+                </label>
+            </div>
+
+            <!-- Shared fields -->
+            <input type="text" id="create-username" placeholder="Username" class="border-2 border-black text-white my-2 text-2xl w-full">
+            <input type="password" id="create-password" placeholder="Password" class="border-2 border-black text-white my-2 text-2xl w-full">
+
+            <!-- Student fields -->
+            <div id="student-fields" class="flex flex-col items-center w-full">
+                <input type="text" id="create-firstName" placeholder="First Name" class="border-2 border-black text-white my-2 text-2xl w-full">
+                <input type="text" id="create-lastName" placeholder="Last Name" class="border-2 border-black text-white my-2 text-2xl w-full">
+                <input type="text" id="create-email" placeholder="Email" class="border-2 border-black text-white my-2 text-2xl w-full">
+                <input type="text" id="create-studentId" placeholder="Student ID" class="border-2 border-black text-white my-2 text-2xl w-full">
+                <input type="text" id="create-major" placeholder="Major" class="border-2 border-black text-white my-2 text-2xl w-full">
+                <input type="text" id="create-track" placeholder="Track (Standard or Applied)" class="border-2 border-black text-white my-2 text-2xl w-full">
+            </div>
+
+            <!-- Admin fields -->
+            <div id="admin-fields" style="display:none;" class="flex flex-col items-center w-full">
+                <input type="password" id="create-code" placeholder="Authorization Code" class="border-2 border-black text-white my-2 text-2xl w-full">
+            </div>
+
+            <button id="create-button" class="border-2 border-black px-4 py-2 text-white text-xl mt-2">Create Account</button>
+        </div>
+
     </div>
+
+    <script src="/scripts/loginAPI.js" defer></script>
+    <script src="/scripts/createUser.js" defer></script>
+    <script>
+        function toggleCreateForm() {
+            const form = document.getElementById('create-form');
+            form.style.display = form.style.display === 'none' ? 'flex' : 'none';
+        }
+
+        function switchAccountType(type) {
+            const studentFields = document.getElementById('student-fields');
+            const adminFields = document.getElementById('admin-fields');
+            if (type === 'student') {
+                studentFields.style.display = 'flex';
+                adminFields.style.display = 'none';
+            } else {
+                studentFields.style.display = 'none';
+                adminFields.style.display = 'flex';
+            }
+        }
+    </script>
 </body>
 </html>

@@ -8,7 +8,6 @@ import userRoutes from './routes/userRoutes.js';
 import studentRoutes from './routes/studentRoutes.js';
 import degreeRequirementRoutes from './routes/degreeRequirementRoutes.js';
 import courseRoutes from './routes/courseRoutes.js';
-import scheduleCartRoutes from './routes/scheduleCartRoutes.js';
 import {requireAuth } from './auth/auth.js';
 
 const app = express();
@@ -34,9 +33,8 @@ mongoose.connect(process.env.MONGO_URI)
       .collection('degreeRequirements')
       .countDocuments();
     const coursesCount = await mongoose.connection.collection('courses').countDocuments();
-    const scheduleCartsCount = await mongoose.connection.collection('scheduleCarts').countDocuments();
     console.log(
-      `Mongo counts -> users: ${usersCount}, students: ${studentsCount}, degreeRequirements: ${degreeRequirementsCount}, courses: ${coursesCount}, scheduleCarts: ${scheduleCartsCount}`
+      `Mongo counts -> users: ${usersCount}, students: ${studentsCount}, degreeRequirements: ${degreeRequirementsCount}, courses: ${coursesCount}`
     );
   })
 	.catch(err => console.error('Connection error: ' , err));
@@ -71,12 +69,16 @@ app.get('/schedule', requireAuth, (req, res) => {
     res.sendFile(path.join(rootDir, 'pages/schedule.html'));
 })
 
+app.get('/courses', (req, res) => {
+    console.log('Serving file: ' + rootDir + '/pages/courses.html');
+    res.sendFile(path.join(rootDir, 'pages/courses.html'));
+})
+
 app.use(express.static(rootDir));
 app.use('/api/users', userRoutes);
 app.use('/api/students', studentRoutes);
 app.use('/api/degree-requirements', degreeRequirementRoutes);
 app.use('/api/courses', courseRoutes);
-app.use('/api/schedule-carts', scheduleCartRoutes);
 
 app.listen(port, () => {
     console.log('Server is listening on port ' + port);

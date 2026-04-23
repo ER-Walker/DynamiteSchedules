@@ -5,26 +5,27 @@
         <title>Dashboard</title>
         <link rel="stylesheet" href="styles/dashboardStyle.min.css"> 
     </head>
-    <body class="bg-gray-600">
+    <body class="bg-gray-800">
         <script src="../scripts/button.js"></script>
-        <div id="WelcomeBanner" class="flex-row justify-center items-center rounded-md text-center bg-red-800 border-2 border-white text-3xl">
-            <h1 class="text-white font-mono font-extrabold">Welcome Back!</h1>
+        <div id="WelcomeBanner" class="flex-row justify-center items-center rounded-md text-center bg-red-800 border-2 border-white text-3xl w-95% m-3">
+            <h1 class="text-white font-mono font-extrabold my-2">Welcome Back!</h1>
+            <button id="logout-button" class="my-1 border-2 border-black rounded-md px-4 w-auto text-[rgb(253,186,116)] text-xl bg-[rgb(31,41,55)]">Logout</button>
         </div>
         <div id="Row1" class="flex flex-row justify-center items-center mt-6">
             <div id="create" class="flex flex-col justify-center rounded-md items-center my-2 mx-4 w-2/5 h-60 text-center bg-red-800 border-2 border-white">
                 <h2 class="text-white font-mono font-extrabold text-xl my-2 ">Schedules</h2>
-                <button data-url="schedule" class="bg-gray-800 text-orange-300 text-base">New Schedule</button>
+                <button data-url="schedule" class="my-1 border-2 border-black rounded-md px-4 w-auto text-[rgb(253,186,116)] text-xl bg-[rgb(31,41,55)]">New Schedule</button>
             </div>
             <div id="courses" class="flex flex-col justify-center items-center my-2 mx-4 w-2/5 h-60 text-center bg-red-800 border-2 border-white rounded-md">
                 <h2 class="text-white font-mono font-extrabold text-xl my-2">Course List</h2>
-                <button data-url="courses" class="bg-gray-800 text-orange-300 text-base">View Courses</button>
+                <button data-url="courses" class="my-1 border-2 border-black rounded-md px-4 w-auto text-[rgb(253,186,116)] text-xl bg-[rgb(31,41,55)]">View Courses</button>
             </div>
             <div id="resources" class="flex flex-col justify-center items-center my-2 mx-4 w-2/5 h-60 text-center bg-red-800 border-2 border-white rounded-md">
                 <h2 class="text-white font-mono font-extrabold text-xl my-2">Resources</h2>
-                <button data-url="resources" class="bg-gray-800 text-orange-300 text-base">Find Resources</button>
+                <button data-url="resources" class="my-1 border-2 border-black rounded-md px-4 w-auto text-[rgb(253,186,116)] text-xl bg-[rgb(31,41,55)]">Find Resources</button>
             </div>
         </div>
-        <button id="logout-button" class="border-2 border-black px-4 wx-8 text-white text-xl">Logout</button>
+        
         <script src="/scripts/logout.js" defer></script>
     </body>
 </html>

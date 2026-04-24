@@ -33,6 +33,11 @@ const courseSchema = new mongoose.Schema(
     requirementTag: {
       type: [String],
       default: []
+    },
+    department: {
+      type: String,
+      default: '',
+      trime: true
     }
   },
   {

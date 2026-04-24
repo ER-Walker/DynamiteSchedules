@@ -9,8 +9,13 @@
         <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
         <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     </head>
-    <body>
+   <body class="bg-gray-800">
+        <div class="flex-row justify-center items-center rounded-md text-center bg-red-800 border-2 border-white text-3xl w-95% m-3">
+            <h1 class="text-[30px] text-white text-center font-mono font-extrabold my-2">Courses</h1>
+            <button data-url="dashboard" class="my-1 border-2 border-black rounded-md px-4 w-auto text-[rgb(253,186,116)] text-xl bg-[rgb(31,41,55)]">Back to Dashboard</button>
+        </div>
         <div id="root"></div>
-        <script type="text/babel" data-presets="react" src="scripts/CoursesPage.js"></script>
+        <script type="text/babel" data-presets="react" src="/scripts/CoursesPage.js"></script>
+        <script src="/scripts/button.js" defer></script>
     </body>
 </html>

@@ -69,6 +69,11 @@ app.get('/schedule', requireAuth, (req, res) => {
     res.sendFile(path.join(rootDir, 'pages/schedule.html'));
 })
 
+app.get('/cart', requireAuth, (req, res) => {
+    console.log('Serving file: ' + rootDir + '/pages/cart.html');
+    res.sendFile(path.join(rootDir, 'pages/cart.html'));
+})
+
 app.get('/courses', (req, res) => {
     console.log('Serving file: ' + rootDir + '/pages/courses.html');
     res.sendFile(path.join(rootDir, 'pages/courses.html'));

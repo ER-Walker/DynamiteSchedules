@@ -89,7 +89,13 @@ function populateRequirementOptions() {
             return;
         }
 
-        (course.requirementTag || []).forEach((tag) => tags.add(tag));
+        (course.requirementTag || []).forEach((tag) => {
+            const normalizedTag = String(tag || '').trim();
+
+            if (normalizedTag) {
+                tags.add(normalizedTag);
+            }
+        });
     });
 
     tagFilter.innerHTML = '';

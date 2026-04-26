@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dynamite Schedules | Cart</title>
+        <link rel="stylesheet" href="/styles/cartStyle.css">
+        <script src="/scripts/cartPage.js" defer></script>
+    </head>
+    <body class="cart-page">
+        <div class="page-banner">
+            <h1>Cart</h1>
+        </div>
+
+        <div class="page-shell">
+            <section class="list-panel">
+                <p id="cart-message" class="cart-message"></p>
+                <div id="cart-list" class="cart-list">
+                    <div class="cart-card empty-state">Loading cart courses...</div>
+                </div>
+                <div class="action-row">
+                    <button id="commit-cart-button" class="action-button" type="button">Add To Classes</button>
+                    <button id="remove-cart-button" class="action-button" type="button">Remove From Cart</button>
+                </div>
+            </section>
+        </div>
+
+        <a href="/dashboard" class="back-link bottom-link">Back to Dashboard</a>
+        <button id="logout-button" class="logout-button">Logout</button>
+        <script src="/scripts/logout.js" defer></script>
+    </body>
+</html>

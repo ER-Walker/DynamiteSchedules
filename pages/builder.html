@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dynamite Schedules | Build Schedule</title>
+        <!-- TODO: Replace with your compiled CSS output path -->
+        <link rel="stylesheet" href="/styles/builderStyleCompiled.css">
+    </head>
+ 
+    <body class="bg-gray-800 min-h-screen pb-10">
+ 
+        <!-- Banner -->
+        <div class="flex-row justify-center items-center rounded-md text-center bg-red-800 border-2 border-white text-3xl w-95% m-3">
+            <h1 class="text-white font-mono font-extrabold my-2">Build Schedule</h1>
+            <button data-url="dashboard" class="my-1 border-2 border-black rounded-md px-4 w-auto text-[rgb(253,186,116)] text-xl bg-[rgb(31,41,55)]">Back to Dashboard</button>
+        </div>
+ 
+        <!-- Main content -->
+        <div class="flex flex-row justify-center items-start mt-6 px-3 gap-4">
+ 
+            <!-- Left: Course selection -->
+            <div class="flex flex-col w-2/5">
+                <div class="flex flex-col justify-center rounded-md items-center my-2 text-center bg-red-800 border-2 border-white p-4">
+                    <h2 class="text-white font-mono font-extrabold text-xl my-2">Select Courses</h2>
+                    <p class="text-white font-mono text-sm mb-1">Choose up to 5 courses to schedule</p>
+ 
+                    <p id="schedule-message" class="font-mono text-sm text-yellow-300 min-h-5 my-1"></p>
+ 
+                    <div id="course-list" class="w-full flex flex-col gap-2 my-2">
+                        <p class="text-white font-mono text-sm">Loading cart courses...</p>
+                    </div>
+ 
+                    <div class="flex flex-row gap-3 mt-3 flex-wrap justify-center">
+                        <button
+                            id="build-schedule-button"
+                            type="button"
+                            disabled
+                            class="my-1 border-2 border-black rounded-md px-4 w-auto text-[rgb(253,186,116)] text-xl bg-[rgb(31,41,55)] disabled:opacity-40 disabled:cursor-not-allowed"
+                        >
+                            Build Schedule
+                        </button>
+                        <button
+                            id="clear-schedule-button"
+                            type="button"
+                            disabled
+                            class="my-1 border-2 border-black rounded-md px-4 w-auto text-[rgb(253,186,116)] text-xl bg-[rgb(31,41,55)] disabled:opacity-40 disabled:cursor-not-allowed"
+                        >
+                            Clear
+                        </button>
+                    </div>
+                </div>
+            </div>
+ 
+            <!-- Right: Schedule output -->
+            <div class="flex flex-col w-3/5">
+                <div id="schedule-section" class="hidden flex flex-col justify-center rounded-md items-center my-2 text-center bg-red-800 border-2 border-white p-4">
+                    <div class="flex flex-row justify-between items-center w-full mb-3">
+                        <h2 class="text-white font-mono font-extrabold text-xl">Generated Schedule</h2>
+                        <button
+                            id="regenerate-button"
+                            type="button"
+                            class="border-2 border-black rounded-md px-3 py-0.5 text-[rgb(253,186,116)] text-base bg-[rgb(31,41,55)]"
+                        >
+                            ↺ Regenerate
+                        </button>
+                    </div>
+ 
+                    <!-- Weekly grid -->
+                    <div class="w-full overflow-x-auto mb-4">
+                        <div id="schedule-grid" class="schedule-grid w-full min-w-[420px] border border-white rounded-md overflow-hidden">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+ 
+                    <!-- Summary cards -->
+                    <div id="schedule-cards" class="schedule-cards w-full">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+ 
+                <!-- Placeholder when no schedule yet -->
+                <div id="schedule-placeholder" class="flex flex-col justify-center rounded-md items-center my-2 text-center bg-red-800 border-2 border-white p-4 h-60">
+                    <p class="text-white font-mono font-extrabold text-xl">No Schedule Yet</p>
+                    <p class="text-white font-mono text-sm mt-2">Select courses on the left and click <br><span class="text-[rgb(253,186,116)]">Build Schedule</span> to get started.</p>
+                </div>
+            </div>
+ 
+        </div>
+ 
+        <script src="/scripts/schedulePage.js" defer></script>
+        <script src="/scripts/button.js" defer></script>
+    </body>
+</html>

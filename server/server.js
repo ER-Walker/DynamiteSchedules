@@ -74,13 +74,17 @@ app.get('/cart', requireAuth, (req, res) => {
     res.sendFile(path.join(rootDir, 'pages/cart.html'));
 })
 
-app.get('/courses', (req, res) => {
+app.get('/courses', requireAuth, (req, res) => {
     console.log('Serving file: ' + rootDir + '/pages/courses.html');
     res.sendFile(path.join(rootDir, 'pages/courses.html'));
 })
 
 app.get('/currentClasses/', requireAuth, (req, res) => {
     res.sendFile(path.join(rootDir, 'pages/currentClasses.html'));
+});
+
+app.get('/builder', requireAuth, (req, res) => {
+    res.sendFile(path.join(rootDir, 'pages/builder.html'));
 });
 
 app.use(express.static(rootDir));

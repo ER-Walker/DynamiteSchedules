@@ -5,6 +5,7 @@ import {
   getCurrentStudentCart,
   getStudentById,
   getStudents,
+  getCurrentClasses,
   moveCartToCurrentClasses,
   removeSelectedCoursesFromCart
 } from '../controllers/studentController.js';
@@ -17,6 +18,7 @@ router.get('/cart', requireAuth, getCurrentStudentCart);
 router.patch('/cart/commit', requireAuth, moveCartToCurrentClasses);
 router.patch('/cart/remove', requireAuth, removeSelectedCoursesFromCart);
 router.patch('/cart', requireAuth, addCourseToCart);
+router.get('/currentClasses', requireAuth, getCurrentClasses);
 router.get('/:id', getStudentById);
 router.post('/', createStudent);
 

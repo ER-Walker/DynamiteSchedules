@@ -79,6 +79,10 @@ app.get('/courses', (req, res) => {
     res.sendFile(path.join(rootDir, 'pages/courses.html'));
 })
 
+app.get('/currentClasses/', requireAuth, (req, res) => {
+    res.sendFile(path.join(rootDir, 'pages/currentClasses.html'));
+});
+
 app.use(express.static(rootDir));
 app.use('/api/users', userRoutes);
 app.use('/api/students', studentRoutes);

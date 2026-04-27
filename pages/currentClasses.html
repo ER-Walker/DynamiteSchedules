@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dynamite Schedules | Current Classes</title>
+        <link rel="stylesheet" href="/styles/cartStyle.css">
+        <script src="/scripts/currentClasses.js" defer></script>
+    </head>
+    <body class="cart-page">
+        <div class="page-banner">
+            <h1>Current Classes</h1>
+        </div>
+
+        <div class="page-shell">
+            <section class="list-panel">
+                <p id="classes-message" class="cart-message"></p>
+                <div id="classes-list" class="cart-list">
+                    <div class="cart-card empty-state">Loading current classes...</div>
+                </div>
+            </section>
+        </div>
+
+        <a href="/dashboard" class="back-link bottom-link">Back to Dashboard</a>
+        <button id="logout-button" class="logout-button">Logout</button>
+        <script src="/scripts/logout.js" defer></script>
+    </body>
+</html>

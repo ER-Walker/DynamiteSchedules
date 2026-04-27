@@ -83,6 +83,33 @@ export async function getCurrentStudentCart(req, res) {
   }
 }
 
+export async function getCurrentClasses(req, res) {
+  try {
+    const username = req.user?.username;
+
+    if (!username) {
+      return res.status(401).json({ message: 'Unauthorized' });
+    }
+
+    const user = await User.findOne({ username }).select('_id');
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const student = await Student.findOne({ userId: user._id }).select('currentClasses');
+    if (!student) {
+      return res.status(404).json({ message: 'Student not found for this user' });
+    }
+
+    const currentClassIds = Array.isArray(student.currentClasses) ? student.currentClasses : [];
+    const courses = await Course.find({ _id: { $in: currentClassIds } }).sort({ _id: 1 });
+
+    return res.status(200).json({ currentClasses: courses });
+  } catch (err) {
+    return res.status(500).json({ message: 'Failed to fetch current classes', error: err.message });
+  }
+}
+
 export async function moveCartToCurrentClasses(req, res) {
   try {
     const username = req.user?.username;
@@ -181,10 +208,21 @@ export async function addCourseToCart(req, res) {
       return res.status(404).json({ message: 'Student not found for this user' });
     }
 
-    const course = await Course.findById(normalizedCourseId).select('_id');
+    const course = await Course.findById(normalizedCourseId).select('_id prerequisite');
 
     if (!course) {
       return res.status(404).json({ message: 'Course not found' });
+    }
+
+    const prerequisites = (course.prerequisite || []).map(p => String(p).trim()).filter(Boolean);
+    if (prerequisites.length > 0) {
+      const completedClasses = Array.isArray(student.completedClasses) ? student.completedClasses : [];
+      const unmet = prerequisites.filter(prereq => !completedClasses.includes(prereq));
+      if (unmet.length > 0) {
+        return res.status(400).json({
+          message: `Prerequisites not met: ${unmet.join(", ")}`
+        });
+      }
     }
 
     if (!Array.isArray(student.cart)) {

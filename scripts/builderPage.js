@@ -1,4 +1,3 @@
-// Full class strings kept intact so PostCSS content scanning picks them up.
 const PALETTE = [
     { label: 'text-yellow-300',  cellBg: 'bg-yellow-300/20',  hex: '#fde047' },
     { label: 'text-sky-300',     cellBg: 'bg-sky-300/20',     hex: '#7dd3fc' },

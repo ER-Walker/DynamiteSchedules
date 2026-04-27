@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Dynamite Schedules | Build Schedule</title>
         <!-- TODO: Replace with your compiled CSS output path -->
-        <link rel="stylesheet" href="/styles/builderStyleCompiled.css">
+        <link rel="stylesheet" href="/styles/output.css">
     </head>
  
     <body class="bg-gray-800 min-h-screen pb-10">
@@ -23,12 +23,12 @@
             <div class="flex flex-col w-2/5">
                 <div class="flex flex-col justify-center rounded-md items-center my-2 text-center bg-red-800 border-2 border-white p-4">
                     <h2 class="text-white font-mono font-extrabold text-xl my-2">Select Courses</h2>
-                    <p class="text-white font-mono text-sm mb-1">Choose up to 5 courses to schedule</p>
+                    <p class="text-white font-mono text-sm mb-1">Choose up to 5 from your current classes</p>
  
                     <p id="schedule-message" class="font-mono text-sm text-yellow-300 min-h-5 my-1"></p>
  
                     <div id="course-list" class="w-full flex flex-col gap-2 my-2">
-                        <p class="text-white font-mono text-sm">Loading cart courses...</p>
+                        <p class="text-white font-mono text-sm">Loading current classes...</p>
                     </div>
  
                     <div class="flex flex-row gap-3 mt-3 flex-wrap justify-center">
@@ -66,14 +66,7 @@
                         </button>
                     </div>
  
-                    <!-- Weekly grid -->
-                    <div class="w-full overflow-x-auto mb-4">
-                        <div id="schedule-grid" class="schedule-grid w-full min-w-[420px] border border-white rounded-md overflow-hidden">
-                            <!-- Populated by JS -->
-                        </div>
-                    </div>
- 
-                    <!-- Summary cards -->
+                    <!-- Schedule cards -->
                     <div id="schedule-cards" class="schedule-cards w-full">
                         <!-- Populated by JS -->
                     </div>

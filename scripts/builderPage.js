@@ -17,7 +17,7 @@ const state = { courses: [], selected: new Set() };
 const $ = id => document.getElementById(id);
 const courseList = $('course-list'), buildBtn = $('build-schedule-button'),
       clearBtn   = $('clear-schedule-button'), schedSection = $('schedule-section'),
-      placeholder = $('schedule-placeholder'), grid = $('schedule-grid'),
+      placeholder = $('schedule-placeholder'),
       cards = $('schedule-cards'), msg = $('schedule-message');
  
 document.addEventListener('DOMContentLoaded', async () => {
@@ -92,28 +92,6 @@ function buildSchedule() {
         schedule.push({ course: c, hour, days: ['Tue','Thu'] });
     }
  
-    const DAYS = ['Mon','Tue','Wed','Thu','Fri'];
-    const gridMap = {}; DAYS.forEach(d => { gridMap[d] = {}; });
-    schedule.forEach(item => item.days.forEach(d => { gridMap[d][item.hour] = item; }));
-    const colorMap = {}; schedule.forEach((item, i) => { colorMap[item.course._id] = PALETTE[i % PALETTE.length]; });
- 
-    let html = `<div class="bg-gray-800 border-b border-r border-white py-2"></div>`;
-    html += DAYS.map((d,i) => `<div class="bg-gray-800 border-b border-white ${i<4?'border-r':''} py-2 text-center font-mono text-xs font-extrabold text-white uppercase tracking-widest">${d}</div>`).join('');
-    HOURS.forEach((h, hi) => {
-        const last = hi === HOURS.length-1;
-        html += `<div class="bg-gray-800 border-r border-white ${last?'':'border-b'} flex items-center justify-end pr-2 h-12 font-mono text-[10px] text-gray-300">${fmtHour(h)}</div>`;
-        DAYS.forEach((d, di) => {
-            const item = gridMap[d][h], bR = di<4?'border-r border-white':'', bB = last?'':'border-b border-white';
-            if (item) {
-                const cl = colorMap[item.course._id];
-                html += `<div class="cell-accent flex items-center justify-center h-12 ${bR} ${bB} ${cl.cellBg}" style="--cell-color:${cl.hex}"><span class="font-mono text-[10px] font-extrabold ${cl.label} px-1 text-center leading-tight">${esc(item.course._id)}</span></div>`;
-            } else {
-                html += `<div class="h-12 ${bR} ${bB} bg-gray-800/40"></div>`;
-            }
-        });
-    });
- 
-    grid.innerHTML = html;
     cards.innerHTML = schedule.map((item, i) => {
         const cl = PALETTE[i % PALETTE.length];
         return `<div class="flex flex-col bg-[rgb(31,41,55)] border border-white rounded-md p-2 text-left">

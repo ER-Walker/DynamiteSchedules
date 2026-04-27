@@ -99,6 +99,10 @@ app.get('/admin/schedules', requireAuth, (req, res) => {
     res.sendFile(path.join(rootDir, 'pages/adminSchedules.html'));
 });
 
+app.get('/admin/degree-requirements', requireAuth, (req, res) => {
+    res.sendFile(path.join(rootDir, 'pages/adminCourses.html'));
+});
+
 app.use(express.static(rootDir));
 app.use('/api/users', userRoutes);
 app.use('/api/students', studentRoutes);

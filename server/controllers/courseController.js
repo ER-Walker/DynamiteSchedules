@@ -82,3 +82,39 @@ export async function createCourse(req, res) {
     });
   }
 }
+
+export async function updateCourse(req, res) {
+  try {
+    const { name, credits, prerequisite, corequisite, description, requirementTag, department } = req.body;
+
+    if (credits !== undefined && Number.isNaN(Number(credits))) {
+      return res.status(400).json({ message: 'credits must be a number' });
+    }
+
+    const updates = {};
+    if (name !== undefined) updates.name = String(name).trim();
+    if (credits !== undefined) updates.credits = Number(credits);
+    if (description !== undefined) updates.description = String(description).trim();
+    if (department !== undefined) updates.department = String(department).trim();
+    if (prerequisite !== undefined) updates.prerequisite = prerequisite.map(v => String(v).trim()).filter(Boolean);
+    if (corequisite !== undefined) updates.corequisite = corequisite.map(v => String(v).trim()).filter(Boolean);
+    if (requirementTag !== undefined) updates.requirementTag = requirementTag.map(v => String(v).trim()).filter(Boolean);
+
+    const course = await Course.findByIdAndUpdate(req.params.id, updates, { new: true, runValidators: true });
+    if (!course) return res.status(404).json({ message: 'Course not found' });
+
+    return res.status(200).json(course);
+  } catch (err) {
+    return res.status(400).json({ message: 'Failed to update course', error: err.message });
+  }
+}
+
+export async function deleteCourse(req, res) {
+  try {
+    const course = await Course.findByIdAndDelete(req.params.id);
+    if (!course) return res.status(404).json({ message: 'Course not found' });
+    return res.status(200).json({ message: 'Course deleted successfully' });
+  } catch (err) {
+    return res.status(500).json({ message: 'Failed to delete course', error: err.message });
+  }
+}

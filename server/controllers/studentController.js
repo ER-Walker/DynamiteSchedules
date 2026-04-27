@@ -367,3 +367,33 @@ export async function createStudent(req, res) {
     return res.status(400).json({ message: 'Failed to create student', error: err.message });
   }
 }
+
+export async function updateStudent(req, res) {
+  try {
+    const { firstName, lastName, email, major, track } = req.body;
+    const student = await Student.findByIdAndUpdate(
+      req.params.id,
+      { firstName, lastName, email, major, track },
+      {new: true, runValidators: true}
+    ).populate('userId', '_id username role');
+
+    if (!student) {
+      return res.status(404).json({ message: 'Student not found' });
+    }
+    return res.status(200).json(student);
+  } catch (err) {
+    return res.status(400).json({ message: 'Failed to update student', error: err.message });
+  }
+}
+
+export async function deleteStudent(req, res) {
+  try {
+    const student = await Student.findByIdAndDelete(req.params.id);
+    if (!student) {
+      return res.status(404).json({ message: 'Student not found' });
+    }
+    return res.status(200).json({ message: 'Student deleted successfully' });
+  } catch (err) {
+    return res.status(400).json({ message: 'Failed to delete student', error: err.message });
+  }
+}

@@ -94,3 +94,14 @@ export const logoutUser = (req, res) => {
   });
   res.status(200).json({ message: 'Logout successful' });
 };
+
+export const getMe = (req, res) => {
+  if (!req.user) {
+    return res.status(401).json({ message: 'Unauthorized' });
+  }
+  res.status(200).json({
+    id: req.user._id,
+    username: req.user.username,
+    role: req.user.role
+  });
+};

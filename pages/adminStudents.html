@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dynamite Schedules | Manage Students</title>
+        <link rel="stylesheet" href="/styles/cartStyle.css">
+        <script src="/scripts/adminStudents.js" defer></script>
+    </head>
+    <body class="cart-page">
+        <div class="page-banner">
+            <h1>Manage Students</h1>
+        </div>
+
+        <div class="page-shell">
+            <section class="list-panel">
+                <p id="admin-message" class="cart-message"></p>
+
+                <input type="text" id="student-search" placeholder="Search by name or student ID..."
+                    style="width:100%; padding:0.5rem; margin-bottom:1rem; background:rgb(31,41,55); color:white; border:1px solid white; border-radius:0.375rem; box-sizing:border-box;">
+
+                <div id="student-list" class="cart-list">
+                    <div class="cart-card empty-state">Loading students...</div>
+                </div>
+            </section>
+
+            <div id="edit-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.75); z-index:50; justify-content:center; align-items:center;">
+                <div style="background:rgb(31,41,55); border:2px solid white; border-radius:0.5rem; padding:2rem; width:min(90%,500px); max-height:80vh; overflow-y:auto;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+                        <h2 style="color:white; font-family:monospace; font-weight:800; margin:0;">Edit Student</h2>
+                        <button onclick="closeEditModal()" style="color:white; background:none; border:none; font-size:1.5rem; cursor:pointer;">✕</button>
+                    </div>
+                    <input type="hidden" id="edit-student-id">
+                    <label style="color:white; font-family:monospace;">First Name</label>
+                    <input type="text" id="edit-firstName" style="width:100%; margin:0.25rem 0 0.75rem; padding:0.5rem; background:rgb(55,65,81); color:white; border:1px solid white; border-radius:0.375rem; box-sizing:border-box;">
+                    <label style="color:white; font-family:monospace;">Last Name</label>
+                    <input type="text" id="edit-lastName" style="width:100%; margin:0.25rem 0 0.75rem; padding:0.5rem; background:rgb(55,65,81); color:white; border:1px solid white; border-radius:0.375rem; box-sizing:border-box;">
+                    <label style="color:white; font-family:monospace;">Email</label>
+                    <input type="text" id="edit-email" style="width:100%; margin:0.25rem 0 0.75rem; padding:0.5rem; background:rgb(55,65,81); color:white; border:1px solid white; border-radius:0.375rem; box-sizing:border-box;">
+                    <label style="color:white; font-family:monospace;">Major</label>
+                    <input type="text" id="edit-major" style="width:100%; margin:0.25rem 0 0.75rem; padding:0.5rem; background:rgb(55,65,81); color:white; border:1px solid white; border-radius:0.375rem; box-sizing:border-box;">
+                    <label style="color:white; font-family:monospace;">Track</label>
+                    <input type="text" id="edit-track" style="width:100%; margin:0.25rem 0 0.75rem; padding:0.5rem; background:rgb(55,65,81); color:white; border:1px solid white; border-radius:0.375rem; box-sizing:border-box;">
+                    <div style="display:flex; gap:0.75rem; margin-top:1rem;">
+                        <button onclick="saveStudentEdit()" class="action-button">Save</button>
+                        <button onclick="closeEditModal()" class="action-button">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <a href="/dashboard" class="back-link bottom-link">Back to Dashboard</a>
+        <button id="logout-button" class="logout-button">Logout</button>
+        <script src="/scripts/logout.js" defer></script>
+    </body>
+</html>

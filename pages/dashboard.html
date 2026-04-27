@@ -39,7 +39,71 @@
                 <button data-url="builder" class="my-1 border-2 border-black rounded-md px-4 w-auto text-[rgb(253,186,116)] text-xl bg-[rgb(31,41,55)]">Build Your Schedule</button>
             </div>
         </div>
-        
+        <div id="admin-section" style="display:none;" class="flex justify-center mt-10 mb-6">
+            <button id="admin-button" onclick="openAdminModal()"
+                style="
+                    width: 160px;
+                    height: 160px;
+                    border-radius: 50%;
+                    background: radial-gradient(circle at 40% 35%, #ff4444, #8b0000);
+                    border: 6px solid #2d0000;
+                    box-shadow: 0 0 0 6px #555, 0 0 0 10px #333, 0 8px 32px rgba(0,0,0,0.7), inset 0 -6px 12px rgba(0,0,0,0.4);
+                    color: white;
+                    font-family: monospace;
+                    font-weight: 800;
+                    font-size: 1rem;
+                    letter-spacing: 0.05em;
+                    cursor: pointer;
+                    transition: transform 0.1s, box-shadow 0.1s;
+                "
+                onmousedown="this.style.transform='scale(0.95)';this.style.boxShadow='0 0 0 6px #555, 0 0 0 10px #333, 0 2px 8px rgba(0,0,0,0.7), inset 0 -2px 6px rgba(0,0,0,0.4)'"
+                onmouseup="this.style.transform='scale(1)';this.style.boxShadow='0 0 0 6px #555, 0 0 0 10px #333, 0 8px 32px rgba(0,0,0,0.7), inset 0 -6px 12px rgba(0,0,0,0.4)'"
+            >
+                ADMIN
+            </button>
+        </div>
+
+        <div id="admin-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.75); z-index:50; justify-content:center; align-items:center;">
+            <div style="background:rgb(31,41,55); border:2px solid white; border-radius:0.5rem; padding:2rem; width:min(90%, 600px); max-height:80vh; overflow-y:auto;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
+                    <h2 style="color:white; font-family:monospace; font-weight:800; font-size:1.5rem; margin:0;">Admin Controls</h2>
+                    <button onclick="closeAdminModal()" style="color:white; background:none; border:none; font-size:1.5rem; cursor:pointer;">✕</button>
+                </div>
+
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+                    <button onclick="window.location.href='/admin/students'" class="admin-tile">
+                        Manage Students
+                    </button>
+                    <button onclick="window.location.href='/admin/courses'" class="admin-tile">
+                        Manage Courses
+                    </button>
+                    <button onclick="window.location.href='/admin/schedules'" class="admin-tile">
+                         Manage Schedules
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <style>
+            .admin-tile {
+                background: rgb(153,27,27);
+                border: 2px solid white;
+                border-radius: 0.5rem;
+                color: white;
+                font-family: monospace;
+                font-weight: 700;
+                font-size: 1rem;
+                padding: 1.5rem 1rem;
+                cursor: pointer;
+                text-align: center;
+                transition: background 0.2s;
+            }
+            .admin-tile:hover {
+                background: rgb(185,28,28);
+            }
+        </style>
+
         <script src="/scripts/logout.js" defer></script>
+        <script src="/scripts/dashboard.js" defer></script>
     </body>
 </html>

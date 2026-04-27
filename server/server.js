@@ -87,6 +87,18 @@ app.get('/builder', requireAuth, (req, res) => {
     res.sendFile(path.join(rootDir, 'pages/builder.html'));
 });
 
+app.get('/admin/students', requireAuth, (req, res) => {
+    res.sendFile(path.join(rootDir, 'pages/adminStudents.html'));
+});
+
+app.get('/admin/courses', requireAuth, (req, res) => {
+    res.sendFile(path.join(rootDir, 'pages/adminCourses.html'));
+});
+
+app.get('/admin/schedules', requireAuth, (req, res) => {
+    res.sendFile(path.join(rootDir, 'pages/adminSchedules.html'));
+});
+
 app.use(express.static(rootDir));
 app.use('/api/users', userRoutes);
 app.use('/api/students', studentRoutes);

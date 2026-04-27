@@ -392,6 +392,9 @@ export async function deleteStudent(req, res) {
     if (!student) {
       return res.status(404).json({ message: 'Student not found' });
     }
+    
+    await User.findByIdAndDelete(student.userId);
+
     return res.status(200).json({ message: 'Student deleted successfully' });
   } catch (err) {
     return res.status(400).json({ message: 'Failed to delete student', error: err.message });
